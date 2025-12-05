@@ -26,3 +26,14 @@ Real-time collaborative coding interview platform.
    docker build -t coding-interview-app .
    docker run -p 3000:3000 coding-interview-app
    ```
+
+## Testing
+
+Run all integration tests locally:
+```bash
+npm run dev & sleep 3 && node test_integration.js && kill %1
+```
+
+Or manually:
+1. Start the app: `npm run dev`
+2. In another terminal, run: `node test_integration.js`

@@ -14,7 +14,8 @@ const Room = () => {
         // Fetch room existence
         const checkRoom = async () => {
             try {
-                await axios.get(`http://localhost:3000/rooms/${roomId}`);
+                const apiUrl = process.env.REACT_APP_API_URL || window.location.origin;
+                await axios.get(`${apiUrl}/rooms/${roomId}`);
             } catch (e) {
                 alert("Room not found");
                 navigate('/');
@@ -25,7 +26,8 @@ const Room = () => {
 
         checkRoom().then((exists) => {
             if (exists) {
-                const newSocket = io('http://localhost:3000');
+                const socketUrl = process.env.REACT_APP_SOCKET_URL || window.location.origin;
+                const newSocket = io(socketUrl);
                 setSocket(newSocket);
 
                 newSocket.emit('join-room', roomId);

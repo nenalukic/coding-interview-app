@@ -7,7 +7,8 @@ const CreateRoom = () => {
 
     const createRoom = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/rooms');
+            const apiUrl = process.env.REACT_APP_API_URL || window.location.origin;
+            const response = await axios.post(`${apiUrl}/rooms`);
             const { roomId } = response.data;
             navigate(`/room/${roomId}`);
         } catch (error) {

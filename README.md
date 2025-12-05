@@ -29,6 +29,17 @@ Real-time collaborative coding interview platform.
    docker run -p 3000:3000 coding-interview-app
    ```
 
+## Deployment
+
+### Deploy to Render
+For production deployment to Render, see [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for detailed instructions.
+
+Quick deploy:
+1. Push to GitHub
+2. Connect repository to Render dashboard
+3. Render automatically detects `render.yaml` configuration
+4. Deployment completes in ~2-3 minutes
+
 ## Testing
 
 Run all integration tests locally:

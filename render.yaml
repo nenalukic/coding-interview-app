@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: coding-interview-app
+    runtime: node
+    plan: free
+    
+    # Build command
+    buildCommand: npm run install:all && npm run build --prefix client
+    
+    # Start command
+    startCommand: node server/index.js
+    
+    # Environment
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+    
+    # Health check
+    healthCheckPath: /health
+    
+    # Dockerfile support (if using Docker)
+    # dockerfile: ./Dockerfile

@@ -18,6 +18,8 @@ Real-time collaborative coding interview platform.
    ```bash
    npm run dev
    ```
+   This starts both the server and client concurrently using concurrently.
+   
    Server: http://localhost:3000
    Client: http://localhost:5173
 

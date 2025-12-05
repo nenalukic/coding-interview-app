@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: Coding Interview App API
+  version: 1.0.0
+  description: API for managing coding interview rooms.
+paths:
+  /rooms:
+    post:
+      summary: Create a new room
+      responses:
+        '200':
+          description: Room created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roomId:
+                    type: string
+                    example: "123e4567-e89b-12d3-a456-426614174000"
+  /rooms/{id}:
+    get:
+      summary: Get room details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Room details found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  language:
+                    type: string
+                  code:
+                    type: string
+        '404':
+          description: Room not found

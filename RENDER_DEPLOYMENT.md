@@ -45,6 +45,12 @@ Settings → Environment → Add Environment Variable
 - `NODE_ENV`: production
 - `PORT`: 3000 (auto-set by Render)
 
+**Client-side environment variables (for non-Render environments):**
+- `REACT_APP_API_URL`: The server API URL (e.g., `https://your-app.onrender.com`)
+- `REACT_APP_SOCKET_URL`: The Socket.io URL (e.g., `https://your-app.onrender.com`)
+
+Note: On Render, the client automatically uses `window.location.origin` as the API URL, so these are only needed for local development or other deployments.
+
 ### 4. Monitor Deployment
 - View logs: Dashboard → Your Service → Logs
 - Check status: Dashboard → Your Service → Events

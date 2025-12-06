@@ -1,52 +1,88 @@
 # Coding Interview App
 
-Real-time collaborative coding interview platform.
+Real-time collaborative coding interview platform built with React, Express, Socket.io, and CodeMirror.
 
 ## Features
-- Real-time code editing (JS/Python)
-- Shared execution environment
-- Client-side code execution using Web Workers (JS) and Pyodide (Python)
+- 🔄 **Real-time Code Sync** - Changes instantly broadcast to all participants
+- 💻 **Multi-Language Support** - JavaScript and Python with syntax highlighting
+- ▶️ **Live Code Execution** - Run code directly in the browser with instant output
+- 🎨 **Professional Editor** - CodeMirror with VS Code Dark theme
+- 👥 **Collaborative Sessions** - Share unique room links with candidates
+- 📦 **Production Ready** - Deployed on Render with Docker support
 
-## Setup
+## Tech Stack
+- **Frontend**: React 18, Vite, Tailwind CSS, CodeMirror
+- **Backend**: Express.js, Socket.io, Node.js
+- **Execution**: Web Workers (JavaScript), Pyodide (Python)
+- **Deployment**: Docker, Render
 
-1. Install dependencies:
+## Quick Start
+
+### Prerequisites
+- Node.js 18+ installed
+- npm or yarn
+
+### Local Development
+
+1. **Install dependencies:**
    ```bash
    npm run install:all
    ```
 
-2. Run locally (dev mode):
+2. **Start dev server (both client & server):**
    ```bash
    npm run dev
    ```
-   This starts both the server and client concurrently using concurrently.
-   
-   Server: http://localhost:3000
-   Client: http://localhost:5173
+   - Server: http://localhost:3000
+   - Client: http://localhost:5173
 
-3. Build and Run via Docker:
-   ```bash
-   docker build -t coding-interview-app .
-   docker run -p 3000:3000 coding-interview-app
-   ```
+3. **Access the app:**
+   - Open http://localhost:5173 in your browser
+   - Create a new interview room
+   - Share the link with a participant
 
-## Deployment
+### Docker
 
-### Deploy to Render
-For production deployment to Render, see [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for detailed instructions.
-
-Quick deploy:
-1. Push to GitHub
-2. Connect repository to Render dashboard
-3. Render automatically detects `render.yaml` configuration
-4. Deployment completes in ~2-3 minutes
+Build and run with Docker:
+```bash
+docker build -t coding-interview-app .
+docker run -p 3000:3000 coding-interview-app
+```
 
 ## Testing
 
-Run all integration tests locally:
+Run integration tests:
 ```bash
 npm run dev & sleep 3 && node test_integration.js && kill %1
 ```
 
 Or manually:
 1. Start the app: `npm run dev`
-2. In another terminal, run: `node test_integration.js`
+2. In another terminal: `node test_integration.js`
+
+Tests verify:
+- ✅ Room creation via REST API
+- ✅ Client-server Socket.io connections
+- ✅ Real-time code synchronization
+- ✅ Language switching synchronization
+
+## Deployment
+
+### Deploy to Render (Production)
+
+For complete deployment guide with environment setup, see [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)
+
+Quick steps:
+1. Push code to GitHub
+2. Connect repository to Render
+3. Render auto-detects `render.yaml` config
+4. Deployment completes in ~2-3 minutes
+
+**Live Demo**: Check Render dashboard for your app URL
+
+### Key Features for Production
+- Health check endpoint: `/health`
+- Multi-stage Docker build for optimized images
+- Automatic static file serving
+- Socket.io configured for production
+

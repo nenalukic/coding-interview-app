@@ -48,6 +48,11 @@ io.on('connection', (socket) => {
         socket.to(roomId).emit('language-update', language);
     });
 
+    // Handle code execution output sync
+    socket.on('code-output', ({ roomId, output }) => {
+        socket.to(roomId).emit('output-update', output);
+    });
+
     socket.on('disconnect', () => {
         console.log('User disconnected:', socket.id);
     });

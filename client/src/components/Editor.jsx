@@ -22,9 +22,14 @@ const Editor = ({ socket, roomId, initialCode, initialLanguage }) => {
             setLanguage(newLang);
         });
 
+        socket.on('output-update', (newOutput) => {
+            setOutput(newOutput);
+        });
+
         return () => {
             socket.off('code-update');
             socket.off('language-update');
+            socket.off('output-update');
         };
     }, [socket]);
 
@@ -80,6 +85,10 @@ const Editor = ({ socket, roomId, initialCode, initialLanguage }) => {
                 } finally {
                     console.log = originalConsoleLog;
                     setOutput(log);
+                    // Broadcast output to other users in room
+                    if (socket) {
+                        socket.emit('code-output', { roomId, output: log });
+                    }
                 }
 
             } else if (language === 'python') {
@@ -89,10 +98,23 @@ const Editor = ({ socket, roomId, initialCode, initialLanguage }) => {
                 }
                 try {
                     // Capture stdout
-                    pyodideRef.current.setStdout({ batched: (msg) => setOutput(prev => [...prev, msg]) });
+                    const pythonOutput = [];
+                    pyodideRef.current.setStdout({ batched: (msg) => {
+                        pythonOutput.push(msg);
+                        setOutput(prev => [...prev, msg]);
+                    }});
                     await pyodideRef.current.runPythonAsync(code);
+                    // Broadcast output to other users in room
+                    if (socket) {
+                        socket.emit('code-output', { roomId, output: pythonOutput });
+                    }
                 } catch (e) {
-                    setOutput(prev => [...prev, `Error: ${e.message}`]);
+                    const errorMsg = `Error: ${e.message}`;
+                    setOutput(prev => [...prev, errorMsg]);
+                    // Broadcast error to other users
+                    if (socket) {
+                        socket.emit('code-output', { roomId, output: [...pythonOutput, errorMsg] });
+                    }
                 }
             }
         } catch (e) {

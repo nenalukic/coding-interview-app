@@ -5,7 +5,7 @@ import { python } from '@codemirror/lang-python';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 
 const Editor = ({ socket, roomId, initialCode, initialLanguage }) => {
-    const [code, setCode] = useState(initialCode || '// Start coding...');
+    const [code, setCode] = useState(initialCode || '');
     const [language, setLanguage] = useState(initialLanguage || 'javascript');
     const [output, setOutput] = useState([]);
     const [isRunning, setIsRunning] = useState(false);
@@ -66,6 +66,12 @@ const Editor = ({ socket, roomId, initialCode, initialLanguage }) => {
     const runCode = async () => {
         setIsRunning(true);
         setOutput([]); // Clear previous output
+
+        // Don't run if code is empty
+        if (!code.trim()) {
+            setIsRunning(false);
+            return;
+        }
 
         try {
             if (language === 'javascript') {

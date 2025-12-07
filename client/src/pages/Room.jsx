@@ -14,7 +14,7 @@ const Room = () => {
         // Fetch room existence
         const checkRoom = async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
+                const apiUrl = import.meta.env.VITE_API_URL?.trim() || window.location.origin;
                 await axios.get(`${apiUrl}/rooms/${roomId}`);
             } catch (e) {
                 alert("Room not found");
@@ -26,7 +26,7 @@ const Room = () => {
 
         checkRoom().then((exists) => {
             if (exists) {
-                const socketUrl = import.meta.env.VITE_SOCKET_URL || window.location.origin;
+                const socketUrl = import.meta.env.VITE_SOCKET_URL?.trim() || window.location.origin;
                 const newSocket = io(socketUrl);
                 setSocket(newSocket);
 

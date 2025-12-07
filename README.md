@@ -6,6 +6,7 @@ Real-time collaborative coding interview platform built with React, Express, Soc
 - 🔄 **Real-time Code Sync** - Changes instantly broadcast to all participants
 - 💻 **Multi-Language Support** - JavaScript and Python with syntax highlighting
 - ▶️ **Live Code Execution** - Run code directly in the browser with instant output
+- 📊 **Shared Output** - All participants see execution results in real-time
 - 🎨 **Professional Editor** - CodeMirror with VS Code Dark theme
 - 👥 **Collaborative Sessions** - Share unique room links with candidates
 - 📦 **Production Ready** - Deployed on Render with Docker support
@@ -29,14 +30,19 @@ Real-time collaborative coding interview platform built with React, Express, Soc
    npm run install:all
    ```
 
-2. **Start dev server (both client & server):**
+2. **Configure environment (optional):**
+   - Client uses `.env.development` for local development
+   - Defaults to `http://localhost:3000` for API/Socket connections
+   - No additional setup needed if running server on port 3000
+
+3. **Start dev server (both client & server):**
    ```bash
    npm run dev
    ```
    - Server: http://localhost:3000
    - Client: http://localhost:5173
 
-3. **Access the app:**
+4. **Access the app:**
    - Open http://localhost:5173 in your browser
    - Create a new interview room
    - Share the link with a participant

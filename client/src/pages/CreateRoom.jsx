@@ -7,7 +7,7 @@ const CreateRoom = () => {
 
     const createRoom = async () => {
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
+            const apiUrl = import.meta.env.VITE_API_URL?.trim() || window.location.origin;
             const response = await axios.post(`${apiUrl}/rooms`);
             const { roomId } = response.data;
             navigate(`/room/${roomId}`);
